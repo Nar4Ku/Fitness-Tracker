@@ -1,0 +1,8 @@
+.form {
+    &__item { width: 300px; padding-top: 20px;
+        &-picker { color: #673ab7;  font-size: 1.2rem; }
+        &-error { font-size: 0.7rem; }
+    }
+
+    &__actions { @extend .form__item; display: flex; justify-content: flex-end; }
+}

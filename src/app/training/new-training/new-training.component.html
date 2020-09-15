@@ -1,0 +1,20 @@
+<section class="new-training" fxLayout fxLayoutAlign="center">
+    <mat-card fxFlex.xs="100%" fxFlex="400px">
+        <mat-card-title fxLayoutAlign="center">Time to start a workout</mat-card-title>
+
+        <mat-card-content fxLayoutAlign="center">
+
+            <mat-form-field appearance="legacy">
+                <mat-select placeholder="Select type of training">
+                    <mat-option value="1">1</mat-option>
+                    <mat-option value="2">2</mat-option>
+                    <mat-option value="3">3</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </mat-card-content>
+        <mat-card-actions fxLayoutAlign="center">
+            <button mat-raised-button color="primary" type="submit" (click)="onStartingTraining()">Start</button>
+        </mat-card-actions>        
+    </mat-card>
+</section>

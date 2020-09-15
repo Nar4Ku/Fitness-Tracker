@@ -1,0 +1,41 @@
+<section class="form">
+    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="form__item" appearance="legacy">
+            <mat-label>E-mail</mat-label>
+            <input matInput placeholder="email@email.com" formControlName="email">
+            <mat-icon matSuffix color="primary">email</mat-icon>
+            <mat-hint>E-mail to login</mat-hint>
+            <mat-error *ngIf="f.controls.email.errors">Must have a valid e-mail</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form__item" appearance="legacy" hintLabel="Should be at least 8 caracters long">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput placeholder="Type your password" formControlName="password">
+            <mat-icon matSuffix color="primary">vpn_key</mat-icon>
+            <mat-hint align="end">{{ f.controls.password.value?.length }} / 8</mat-hint>
+            <mat-error *ngIf="f.controls.password.hasError('required')">Must have a password</mat-error>
+            <mat-error *ngIf="f.controls.password.hasError('minlength')">Should be at least 8
+                caracters long</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form__item" appearance="legacy">
+            <mat-label>Your birthdate</mat-label>
+            <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="birthdate">
+            <mat-datepicker-toggle class="form__item-picker" color="primary" matSuffix [for]="picker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-hint>Pick the date of your birthday</mat-hint>
+            <mat-error *ngIf="f.controls.birthdate.errors">Must pick a valid date</mat-error>
+        </mat-form-field>
+
+        <div class="form__item">
+            <mat-checkbox color="primary" formControlName="agree">Agree to Terms and Conditions</mat-checkbox>
+            <mat-error class="form__item-error" *ngIf="f.controls.agree.errors">You must agree with our terms and conditions
+            </mat-error>
+        </div>
+
+        <div class="form__actions">
+            <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+        </div>
+    </form>
+</section>

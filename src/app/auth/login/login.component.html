@@ -1,0 +1,28 @@
+<section class="form">
+    <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="form__item" appearance="legacy">
+            <mat-label>E-mail</mat-label>
+            <input matInput placeholder="email@email.com" formControlName="email">
+            <mat-icon matSuffix color="primary">email</mat-icon>
+            <mat-error *ngIf="f.controls.email.errors">Must have a valid e-mail</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form__item" appearance="legacy">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput placeholder="Type your password" formControlName="password">
+            <mat-icon matSuffix color="primary">vpn_key</mat-icon>
+            <mat-error *ngIf="f.controls.password.errors">Your password should be wrong</mat-error>
+        </mat-form-field>
+
+        <div class="form__item">
+            <mat-checkbox color="primary" formControlName="agree">Agree to Terms and Conditions</mat-checkbox>
+            <mat-error class="form__item-error" *ngIf="f.controls.agree.errors">You must agree with our terms and
+                conditions
+            </mat-error>
+        </div>
+
+        <div class="form__actions">
+            <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+        </div>
+    </form>
+</section>

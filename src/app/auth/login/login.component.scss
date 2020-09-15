@@ -1,0 +1,7 @@
+.form {
+    &__item { width: 300px; padding-top: 20px;        
+        &-error { font-size: 0.7rem; }
+    }
+
+    &__actions { @extend .form__item; display: flex; justify-content: flex-end; }
+}

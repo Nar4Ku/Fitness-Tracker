@@ -1,0 +1,7 @@
+.navitagion-items { margin: 0; padding: 0; list-style: none; }
+
+a { text-decoration: none; color: white; 
+    &:active, &:hover { color: lightgray; }
+}
+
+.nav-caption { display: inline-block; padding-left: 6px; }
