@@ -7,16 +7,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
-import { SignupComponent } from './auth/signup/signup.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { LoginComponent } from './auth/login/login.component';
-import { TrainingComponent } from './training/training.component';
+import { LoginComponent } from './auth/components/login/login.component';
+import { SignupComponent } from './auth/components/signup/signup.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
-import { NewTrainingComponent } from './training/new-training/new-training.component';
-import { CurrentTrainingComponent } from './training/current-training/current-training.component';
-import { PastTrainingComponent } from './training/past-training/past-training.component';
-import { StopTrainingComponent } from './training/current-training/stop-training.component';
+import { TrainingComponent } from './training/components/training/training.component';
+import { NewTrainingComponent } from './training/components/new-training/new-training.component';
+import { CurrentTrainingComponent } from './training/components/current-training/current-training.component';
+import { PastTrainingComponent } from './training/components/past-training/past-training.component';
+import { StopTrainingComponent } from './training/components/current-training/stop-training.component';
+
+/* Services */
+import { AuthService } from './auth/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,7 @@ import { StopTrainingComponent } from './training/current-training/stop-training
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   entryComponents: [StopTrainingComponent]
 })
