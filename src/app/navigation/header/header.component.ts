@@ -31,4 +31,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.sidenavToggle.emit();
   }
 
+  onLogout(): void {
+    this._authService.logout();
+  }
+
 }
