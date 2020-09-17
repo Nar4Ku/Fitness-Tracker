@@ -1,53 +1,55 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 import { AuthData } from '../entities/auth-data';
-import { User } from '../entities/user';
+import { TrainingService } from '../../training/services/training.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   authChange = new Subject<boolean>();
-  private user: User;
+  private isAuthenticated = false;
 
   constructor(
-    private _router: Router
+    private _router: Router,
+    private _authFireAuth: AngularFireAuth,
+    private _trainingService: TrainingService
   ) { }
 
-  registerUser(authData: AuthData): void {
-    this.user = {
-      userId: Math.round(Math.random() * 100000).toString(),
-      email: authData.email
-    };
-    this.authSuccefully();
+  initAuthListener(): void {
+    this._authFireAuth.authState.subscribe(user => {
+      if (user) {
+        this.isAuthenticated = true;
+        this.authChange.next(true);
+        this._router.navigate(['/training']);
+      } else {
+        this._trainingService.cancelSubscriptions();
+        this.authChange.next(false);
+        this._router.navigate(['/login']);
+        this.isAuthenticated = false;
+      }
+    });
   }
 
-  login(authData: AuthData): void {
-    this.user = {
-      userId: Math.round(Math.random() * 100000).toString(),
-      email: authData.email
-    };
-    this.authSuccefully();
+  async registerUser(authData: AuthData): Promise<any> {
+    await this._authFireAuth.createUserWithEmailAndPassword(authData.email, authData.password)
+      .catch(err => console.error(err));
+  }
+
+  async login(authData: AuthData): Promise<any> {
+    await this._authFireAuth.signInWithEmailAndPassword(authData.email, authData.password)
+      .catch(err => console.error(err));
   }
 
   logout(): void {
-    this.user = null;
-    this.authChange.next(false);
-    this._router.navigate(['/login']);
-  }
-
-  getUser(): User {
-    return { ... this.user };
+    this._authFireAuth.signOut();
   }
 
   isAuth(): boolean {
-    return !!this.user;
+    return this.isAuthenticated;
   }
 
-  private authSuccefully(): void {
-    this.authChange.next(true);
-    this._router.navigate(['/training']);
-  }
 }
