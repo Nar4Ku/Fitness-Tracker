@@ -24,7 +24,11 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "allowedCommonJsDependencies": [
-              "rxjs-compat"
+              "rxjs/Subject",
+              "firebase",
+              "@firebase/app",
+              "@firebase/auth",
+              "@firebase/firestore"
             ],
             "assets": [
               "src/favicon.ico",
