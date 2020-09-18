@@ -4,7 +4,7 @@
             <mat-card-title fxLayoutAlign="center">Time to start a workout</mat-card-title>
 
             <mat-card-content fxLayoutAlign="center">
-                <mat-form-field appearance="legacy">
+                <mat-form-field *ngIf="!isLoading && exercises" appearance="legacy">
                     <mat-select placeholder="Select type of training" formControlName="exercise">
                         <mat-option *ngFor="let exercise of exercises" [value]="exercise.id">
                             {{ exercise.name }}
@@ -13,11 +13,17 @@
                     <mat-error>Select an exercise!</mat-error>
                 </mat-form-field>
 
+                <mat-spinner *ngIf="isLoading"></mat-spinner>
             </mat-card-content>
-            <mat-card-actions fxLayoutAlign="center">
-                <button mat-raised-button color="primary" type="submit"
+
+            <mat-card-actions *ngIf="!isLoading" fxLayoutAlign="center">
+                <button *ngIf="exercises" mat-raised-button color="primary" type="submit"
                     [disabled]="newTrainingForm.invalid">Start</button>
+                <button *ngIf="!exercises" mat-raised-button color="primary" type="button"
+                    (click)="fecthExercises()">Fecth Again</button>
+
             </mat-card-actions>
+
         </mat-card>
     </form>
 </section>

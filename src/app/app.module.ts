@@ -26,6 +26,7 @@ import { StopTrainingComponent } from './training/components/current-training/st
 /* Services */
 import { AuthService } from './auth/services/auth.service';
 import { TrainingService } from './training/services/training.service';
+import { UIService } from './shared/services/ui.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,10 @@ import { TrainingService } from './training/services/training.service';
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
-  providers: [AuthService, TrainingService],
+  providers: [
+    AuthService,
+    TrainingService,
+    UIService],
   bootstrap: [AppComponent],
   entryComponents: [StopTrainingComponent]
 })

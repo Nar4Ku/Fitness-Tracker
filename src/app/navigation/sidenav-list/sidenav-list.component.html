@@ -1,4 +1,9 @@
+<a [routerLink]="['/']" class="logo" color="primary">            
+    <mat-icon>shutter_speed</mat-icon>
+    <span>NG Fitness Tracker</span>            
+</a>
 <mat-nav-list>
+
     <a *ngIf="!isAuth" mat-list-item [routerLink]="['/signup']" (click)="onClose()">
         <mat-icon color="primary">face</mat-icon>
         <span class="nav-caption">Signup</span>

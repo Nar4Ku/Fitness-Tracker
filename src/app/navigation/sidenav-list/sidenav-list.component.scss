@@ -5,3 +5,7 @@ a { text-decoration: none; color: white;
 }
 
 .nav-caption { display: inline-block; padding-left: 6px; }
+
+.logo { display: flex; align-items: center; padding: 20px 10px; color: white; background-color: #673ab7; font-size: 1.5rem; text-decoration: none; transition: .3s;    
+   span { font-size: 0.9rem; font-weight: 500; padding-left: 10px; }
+}
