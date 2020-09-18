@@ -30,14 +30,16 @@
 
         <div class="form__item">
             <mat-checkbox color="primary" formControlName="agree">Agree to Terms and Conditions</mat-checkbox>
-            <mat-error class="form__item-error" *ngIf="f.controls.agree.errors">You must agree with our terms and conditions
+            <mat-error class="form__item-error" *ngIf="f.controls.agree.errors">You must agree with our terms and
+                conditions
             </mat-error>
         </div>
 
         <div class="form__actions">
-            <button *ngIf="!isLoading" type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+            <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary"
+                [disabled]="f.invalid">Submit</button>
         </div>
 
-        <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
     </form>
 </section>

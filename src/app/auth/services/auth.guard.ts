@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Router, CanLoad, Route } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanLoad, Route } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
-import { AuthService } from './auth.service';
+import * as fromRoot from '../../app.reducer';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +12,16 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanLoad {
 
   constructor(
-    private _authService: AuthService,
+    private _store: Store<fromRoot.State>,
     private _router: Router
   ) { }
 
-  canLoad(route: Route): boolean {
-    if (this._authService.isAuth()) {
-      return true;
-    } else {
-      this._router.navigate(['/login']);
-    }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this._store.select(fromRoot.getIsAuthenticated).pipe(take(1));
+  }
+
+  canLoad(route: Route): Observable<boolean> {
+    return this._store.select(fromRoot.getIsAuthenticated).pipe(take(1));
   }
 
 }
